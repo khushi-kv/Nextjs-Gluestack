@@ -2,6 +2,25 @@
     font-size:14px;
 }
 .blog-content{
-    font-size: 15px;
-    width:50%;
+    position:relative;
+    top:15px;
+    font-size: 16px;
+    max-width:100%;
+    
+    
+    font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif;
+    line-height: 24px;
+    display:flex;
+    flex-wrap: wrap;
+    
+
 }
+
+@media only screen and (max-width:425px)
+{   
+    
+    .blog-content{
+        display:none;
+    }
+}
+

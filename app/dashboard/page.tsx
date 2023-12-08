@@ -15,7 +15,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import React from "react";
 import Login from "../components/login/login";
-import Blogs from "../components/Blogs/blogs";
+import Blogs from "../components/blogs/blogs";
 import Singleblog from "../blog/[blogId]/page";
 export default function Dashboard() {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -60,6 +60,9 @@ export default function Dashboard() {
           isReadOnly={false}
           borderColor="#F9F9F9"
           bg="#F9F9F9"
+
+         
+          
         >
           {/* <Image
             src={"/search.png"}

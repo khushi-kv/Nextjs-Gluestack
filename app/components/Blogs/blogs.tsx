@@ -1,58 +1,209 @@
 import React from "react";
 import Blog from "../../../data/blogposts.json";
 import Link from "next/link";
-import { Avatar, AvatarImage, Box, Heading } from "@gluestack-ui/themed";
+import {
+  AvatarImage,
+  Box,
+  Heading,
+  Icon,
+ Text,
+  ThreeDotsIcon,
+} from "@gluestack-ui/themed";
 import "/styles/blogs.css";
 import { Image } from "@gluestack-ui/themed";
+import Staffpicks from "../staffpicks/staffpicks";
+
 export default function Blogs() {
   function blogdata() {
     return Blog;
   }
   const data = blogdata();
-  return (
-    <Box padding={"$4"}>
-      {data.map((post) => (
-        <div key={post.id}>
-          <Box display="flex" flexDirection="row" gap={"$3"}>
-            <Avatar borderColor="$white">
-              <AvatarImage
-                source={{
-                  uri: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-                }}
-                size="xs"
-                borderColor="$white"
-              />
-            </Avatar>
-            <Box display="flex" flexDirection="row" gap={"$1"} marginTop={"$3"}>
-              <p className="blog-head">{post.author}</p>
-              <p className="blog-head">{post.date}</p>
-            </Box>
-          </Box>
 
-          <Link href={`/blog/${post.id}`}>
-            <Heading fontSize={"$2xl"}>{post.title}</Heading>
-          </Link>
-          <Box display="flex" flexDirection="row">
-            <p className="blog-content">{post.content}</p>
-            <Image
-              size="lg"
-              marginTop={"-$6"}
-              source={{
-                uri: "https://whatfix.com/blog/wp-content/uploads/2021/09/digital-innovation.jpg",
-              }}
-            />
-          </Box>
-          
-        </div>
-      ))}
+  return (
+    <Box display="flex" flexDirection="row" gap={"$8"}>
       <Box
-        borderRadius="$xs"
-        borderBottomColor="$secondary200"
-        borderWidth="$1"
-        borderTopWidth="$0"
-        borderLeftWidth="$0"
-        borderRightWidth="$0"
+        paddingLeft={"$40"}
+        sx={{
+          "@base": {
+            // bg: "$red500",
+            padding: "$2",
+          },
+          "@md": {
+            // bg: "$green500",
+            padding: "$4",
+          },
+          "@lg": {
+            // bg: "$blue500",
+            padding: "$20",
+            paddingLeft: "$40",
+          },
+        }}
+
+        // width={"$6/12"}
+      >
+        <Box display="flex" width={"$4/6"} flexWrap="wrap">
+          {data.map((post) => (
+            <div key={post.id}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                gap={"$3"}
+                paddingTop={"$6"}
+              >
+                <AvatarImage
+                  source={{
+                    uri: "https:images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+                  }}
+                  size="lg"
+                  width={30}
+                  height={30}
+                />
+
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  gap={"$1"}
+                  marginTop={"$2"}
+                  marginLeft={"$10"}
+                >
+                  <p className="blog-head">{post.author} . </p>
+                  <p className="blog-head">{post.date}</p>
+                </Box>
+              </Box>
+
+              <Link href={`/blog/${post.id}`}>
+                <Heading
+                  fontSize={"$xl"}
+                  position="relative"
+                  top={"$2"}
+                  sx={{
+                    "@base": {
+                      fontSize: "$md",
+                    },
+                    "@md": {
+                      fontSize: "$xl",
+                    },
+                    "@lg": {
+                      fontSize: "$xl",
+                    },
+                  }}
+                >
+                  {post.title}
+                </Heading>
+              </Link>
+              <Box display="flex" flexDirection="row">
+                <p className="blog-content">{post.content}</p>
+
+                <Image
+                  size="lg"
+                  marginTop={"-$6"}
+                  source={{
+                    uri: "https://whatfix.com/blog/wp-content/uploads/2021/09/digital-innovation.jpg",
+                  }}
+                  position="relative"
+                  alt="blog-image"
+                />
+              </Box>
+              <Box
+                display="flex"
+                flexDirection="row"
+                gap={"$32"}
+                sx={{
+                  "@base": {
+                    gap: "$4",
+                  },
+                  "@md": {
+                    // bg: "$green500",
+                    gap: "$32",
+                  },
+                  "@lg": {
+                    // bg: "$blue500",
+                    gap: "$32",
+                  },
+                }}
+              >
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  marginTop={"$10"}
+                  gap={"$2"}
+                >
+                  <Text
+                    fontSize={"$xs"}
+                    backgroundColor="#F2F2F2"
+                    padding={"$1"}
+                    borderRadius={"$xl"}
+                    color="$black"
+                  >
+                    Application
+                  </Text>
+
+                  <Text fontSize={"$xs"} marginTop={"$1"} color="#6B6B6B">
+                    11 min read .
+                  </Text>
+                  <Text fontSize={"$xs"} marginTop={"$1"} color="#6B6B6B">
+                    Selected for you{" "}
+                  </Text>
+                </Box>
+                <Box display="flex" flexDirection="row" gap={"$4"}>
+                  <Image
+                    source={{
+                      uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMEdCeu06mEtQLnDVwaUKfTN3RAOdEGEaokg&usqp=CAU",
+                    }}
+                    alt="saveicon"
+                    width={34}
+                    height={30}
+                    position="relative"
+                    top={"$10"}
+                  />
+                  <Box
+                    display="flex"
+                    flexDirection="row"
+                    gap={"$4"}
+                    // marginTop={"$1"}
+                  >
+                    <Image
+                      source={{
+                        uri: "https://www.svgrepo.com//show/55381/minus-sign-in-a-circular-button.svg",
+                      }}
+                      alt="minusIcon"
+                      width={18}
+                      height={18}
+                      position="relative"
+                      top={"$12"}
+                    />
+
+                    <Icon
+                      as={ThreeDotsIcon}
+                      m="$4"
+                      w="$4"
+                      h="$4"
+                      position="relative"
+                      top={"$8"}
+                    />
+                  </Box>
+                </Box>
+              </Box>
+
+              <Box
+                borderBottomColor="$secondary200"
+                borderBottomWidth="$1"
+                paddingTop={"$10"}
+              />
+            </div>
+          ))}
+        </Box>
+      </Box>
+      <Box
+        borderLeftColor="$secondary200"
+        borderLeftWidth="$1"
+        position="relative"
+        right={"$80"}
+       
       />
+     <Staffpicks
+     
+     />
     </Box>
   );
 }

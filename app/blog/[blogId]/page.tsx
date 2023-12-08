@@ -1,6 +1,6 @@
 import React from "react";
 import Blog from "../../../data/blogposts.json";
-import { Avatar, AvatarImage } from "@gluestack-ui/themed";
+import { Avatar, AvatarImage,Box } from "@gluestack-ui/themed";
 import Image from "next/image";
 export default async function page({
   params: { blogId },
@@ -14,7 +14,7 @@ export default async function page({
   const currentBlog = data.find((blog) => blog.id === blogId);
 
   if (!currentBlog) {
-    // Handle the case where the blog with the specified ID is not found
+    
     return <div>Blog not found</div>;
   }
   return (
@@ -26,9 +26,13 @@ export default async function page({
           }}
         />
       </Avatar>
+      <Box>
       <h2>{currentBlog.title}</h2>
       <p>{currentBlog.content}</p>
       <p>Date: {currentBlog.date}</p>
+      </Box>
+      
+     
     </div>
   );
 }
