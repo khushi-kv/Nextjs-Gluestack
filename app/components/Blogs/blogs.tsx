@@ -6,12 +6,13 @@ import {
   Box,
   Heading,
   Icon,
- Text,
+  Text,
   ThreeDotsIcon,
 } from "@gluestack-ui/themed";
 import "/styles/blogs.css";
 import { Image } from "@gluestack-ui/themed";
 import Staffpicks from "../staffpicks/staffpicks";
+
 
 export default function Blogs() {
   function blogdata() {
@@ -159,27 +160,27 @@ export default function Blogs() {
                   <Box
                     display="flex"
                     flexDirection="row"
-                    gap={"$4"}
-                    // marginTop={"$1"}
+                    gap={"$3"}
+                   
                   >
                     <Image
                       source={{
                         uri: "https://www.svgrepo.com//show/55381/minus-sign-in-a-circular-button.svg",
                       }}
                       alt="minusIcon"
-                      width={18}
-                      height={18}
+                      width={20}
+                      height={20}
                       position="relative"
-                      top={"$12"}
+                      top={"$11"}
                     />
 
                     <Icon
                       as={ThreeDotsIcon}
-                      m="$4"
+                      m="$3"
                       w="$4"
                       h="$4"
                       position="relative"
-                      top={"$8"}
+                      top={"$9"}
                     />
                   </Box>
                 </Box>
@@ -194,16 +195,15 @@ export default function Blogs() {
           ))}
         </Box>
       </Box>
+
       <Box
         borderLeftColor="$secondary200"
         borderLeftWidth="$1"
         position="relative"
         right={"$80"}
-       
       />
-     <Staffpicks
-     
-     />
+      <Staffpicks />
+      
     </Box>
   );
 }

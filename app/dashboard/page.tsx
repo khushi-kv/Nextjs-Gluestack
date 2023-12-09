@@ -19,6 +19,7 @@ import Blogs from "../components/blogs/blogs";
 import Singleblog from "../blog/[blogId]/page";
 export default function Dashboard() {
   const [showModal, setShowModal] = useState<boolean>(false);
+
   const ref = React.useRef(null);
   const [username, setUsername] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -60,17 +61,7 @@ export default function Dashboard() {
           isReadOnly={false}
           borderColor="#F9F9F9"
           bg="#F9F9F9"
-
-         
-          
         >
-          {/* <Image
-            src={"/search.png"}
-            alt="search"
-            width={20}
-            height={20}
-            className="searchicon"
-          /> */}
           <Icon as={SearchIcon} w="$5" h="$6" marginTop={"$2"} />
           <InputField placeholder="Search" />
         </Input>
@@ -84,24 +75,17 @@ export default function Dashboard() {
         >
           <Box display="flex" flexDirection="row" marginTop={"$2"}>
             <Image src="/write.png" alt="Write" width={25} height={20} />
-            <span
-              style={{
-                marginLeft: "8px",
-                fontSize: "14px",
-                marginTop: "2px",
-                color: "gray",
-              }}
+            <Button
+              position="relative"
+              bottom={"$2"}
+              bgColor="white"
+              onPress={() => setShowModal(true)}
+              ref={ref}
             >
               Write
-            </span>
+            </Button>
           </Box>
-          {/* <Image
-            src={"/bell.png"}
-            alt="Notification bell"
-            width={38}
-            height={28}
-            style={{ marginTop: "3px" }}
-          /> */}
+
           <Icon as={BellIcon} w="$6" h="$6" marginTop={"$2"} />
           {isLoggedIn ? (
             <Avatar

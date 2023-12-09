@@ -35,7 +35,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "node_modules/@gluestack-ui/**/*.ts"
-  ],
+, "app/components/recommendedpicks"  ],
   "exclude": [
     "node_modules"
   ]
