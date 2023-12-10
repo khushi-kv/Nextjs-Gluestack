@@ -6,13 +6,11 @@ import Profile from "../profile/profile";
 import Write from "../write/write";
 
 export default function Staffpicks() {
-  
   function staffsection() {
     return staffpicksdata;
   }
   const data = staffsection();
   return (
-    
     <Box position="relative" right={"$80"} padding={"$1"} paddingTop={"$4"}>
       <Heading
         fontSize={"$md"}
@@ -50,12 +48,9 @@ export default function Staffpicks() {
       <Text color="#1A8917" fontSize={"$sm"} paddingTop={"$6"}>
         See the full list
       </Text>
-     
-      <Recommendedtopics/>
-      <Profile/>
-     
+
+      <Recommendedtopics />
+      <Profile />
     </Box>
-   
-  
   );
 }

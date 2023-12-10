@@ -21,8 +21,9 @@ export default function Blogs() {
   const data = blogdata();
 
   return (
-    <Box display="flex" flexDirection="row" gap={"$8"}>
+    <Box display="flex" flexDirection="row" gap={"$8"} >
       <Box
+      
         paddingLeft={"$40"}
         sx={{
           "@base": {
@@ -42,7 +43,10 @@ export default function Blogs() {
 
         // width={"$6/12"}
       >
-        <Box display="flex" width={"$4/6"} flexWrap="wrap">
+        <Box display="flex" maxWidth={"$4/6"} flexWrap="wrap"
+      
+       
+        >
           {data.map((post) => (
             <div key={post.id}>
               <Box
