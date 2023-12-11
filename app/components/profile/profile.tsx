@@ -63,7 +63,9 @@ export default function Profile() {
                 position="relative"
                 bottom="$2"
                 left="$4"
-                bgColor="$coolGray100"
+                bgColor="$white"
+                borderWidth={"$1"}
+                borderColor="$black"
               >
                 Follow
               </Button>

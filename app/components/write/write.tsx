@@ -26,16 +26,16 @@ import {
   InputField,
 } from "@gluestack-ui/themed";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function Write({ showModal1, setShowModal1 }: any) {
+export default function Write({ showModal1, setShowModal1, onPublish }: any) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isTitleValid, setIsTitleValid] = useState(false);
   const [isDescriptionValid, setIsDescriptionValid] = useState(false);
   const [titleTouched, setTitleTouched] = useState(false);
   const [descriptionTouched, setDescriptionTouched] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const ref = React.useRef(null);
   const handleTitleChange = (event: any) => {
     const newTitle = event.target.value;
@@ -50,11 +50,39 @@ export default function Write({ showModal1, setShowModal1 }: any) {
     setIsDescriptionValid(newDescription.length >= 30);
     setDescriptionTouched(true);
   };
-  const handleFileChange = (event: any) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setSelectedFile(reader.result as string);
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
+
   const isFormValid = isTitleValid && isDescriptionValid;
+  const handlePublish = () => {
+    onPublish({ title, description, selectedFile });
+    localStorage.setItem("publishedTitle", title);
+    localStorage.setItem("publishedDescription", description);
+    localStorage.setItem("publishedImage", selectedFile || "");
+    setTitle("");
+    setDescription("");
+    setIsTitleValid(false);
+    setIsDescriptionValid(false);
+    setTitleTouched(false);
+    setDescriptionTouched(false);
+    setSelectedFile(null);
+    setShowModal1(false);
+  };
+
+ 
+
+ 
   return (
     <Center h={800}>
       <Modal
@@ -127,14 +155,9 @@ export default function Write({ showModal1, setShowModal1 }: any) {
                     </FormControlErrorText>
                   </FormControlError>
                 )}
-                <input
-                  type="file"
-                  onChange={handleFileChange}
-                  required
-                  style={{
-                    marginTop: "20px",
-                  }}
-                />
+                <div>
+                  <input type="file" onChange={handleFileChange} required />
+                </div>
               </FormControl>
             </Box>
           </ModalBody>
@@ -153,10 +176,7 @@ export default function Write({ showModal1, setShowModal1 }: any) {
               action="positive"
               borderWidth="$0"
               isDisabled={!isFormValid}
-              onPress={() => {
-                setShowModal1(false);
-                
-              }}
+              onPress={handlePublish}
             >
               <ButtonText>Publish</ButtonText>
             </Button>

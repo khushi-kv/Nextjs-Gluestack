@@ -2,15 +2,16 @@
     {
       "id": "1",
       "title": "Apps I Use And Why You Should Too.",
-      "content": "React is arguably the most popular JavaScript library for building user interfaces and one reason for this is its unopinionated nature.",
+      "content": "React is arguably the most popular JavaScript library for building user interfaces and one reason for this is its unopinionated nature.React is arguably the most popular JavaScript library for building user interfaces and one reason for this is its unopinionated nature.React is arguably the most popular JavaScript library for building user interfaces and one reason for this is its unopinionated nature.",
       "date": "25 Aug",
-      "author":"Renan Olovics "
+      "author":"Renan Olovics ",
+      "image":"https:images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
 
     },
     {
       "id": "2",
-      "title": "Apps I Use And Why You Should Too.",
-      "content": "React is arguably the most popular JavaScript library for building user interfaces and one reason for this is its unopinionated nature.",
+      "title": "React Design Patterns: Compound Component Pattern",
+      "content": "#2: Metacognition — Here’s my argument for this essay: Successful people tend to have good relationships with their own minds. When I get to know people who have been successful — and I use that term #2: Metacognition — Here’s my argument for this essay: Successful people tend to have good relationships with their own minds. When I get to know people who have been successful — and I use that term",
       "date": "25 Aug",
       "author":"Renan Olovics "
 

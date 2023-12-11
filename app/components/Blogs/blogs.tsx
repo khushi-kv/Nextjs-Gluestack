@@ -13,40 +13,42 @@ import "/styles/blogs.css";
 import { Image } from "@gluestack-ui/themed";
 import Staffpicks from "../staffpicks/staffpicks";
 
-
-export default function Blogs() {
+export default function Blogs({ publishedData }: { publishedData: any[] }) {
   function blogdata() {
     return Blog;
   }
   const data = blogdata();
 
   return (
-    <Box display="flex" flexDirection="row" gap={"$8"} >
+    <Box
+      display="flex"
+      flexDirection="row"
+      justifyContent="space-evenly"
+      width={"100%"}
+    >
       <Box
-      
-        paddingLeft={"$40"}
-        sx={{
-          "@base": {
-            // bg: "$red500",
-            padding: "$2",
-          },
-          "@md": {
-            // bg: "$green500",
-            padding: "$4",
-          },
-          "@lg": {
-            // bg: "$blue500",
-            padding: "$20",
-            paddingLeft: "$40",
-          },
-        }}
+        padding={"$20"}
+        width={"56%"}
+        paddingLeft={"$20"}
+        // sx={{
+        //   "@base": {
+        //     // bg: "$red500",
+        //     padding: "$2",
+        //   },
+        //   "@md": {
+        //     // bg: "$green500",
+        //     padding: "$4",
+        //   },
+        //   "@lg": {
+        //     // bg: "$blue500",
+        //     padding: "$20",
+        //     // paddingLeft: "$40",
+        //   },
+        // }}
 
         // width={"$6/12"}
       >
-        <Box display="flex" maxWidth={"$4/6"} flexWrap="wrap"
-      
-       
-        >
+        <Box display="flex" flexWrap="wrap">
           {data.map((post) => (
             <div key={post.id}>
               <Box
@@ -101,11 +103,11 @@ export default function Blogs() {
 
                 <Image
                   size="lg"
-                  marginTop={"-$6"}
+                  marginTop={"-$7"}
                   source={{
                     uri: "https://whatfix.com/blog/wp-content/uploads/2021/09/digital-innovation.jpg",
                   }}
-                  position="relative"
+                  marginLeft={"$4"}
                   alt="blog-image"
                 />
               </Box>
@@ -161,12 +163,7 @@ export default function Blogs() {
                     position="relative"
                     top={"$10"}
                   />
-                  <Box
-                    display="flex"
-                    flexDirection="row"
-                    gap={"$3"}
-                   
-                  >
+                  <Box display="flex" flexDirection="row" gap={"$3"}>
                     <Image
                       source={{
                         uri: "https://www.svgrepo.com//show/55381/minus-sign-in-a-circular-button.svg",
@@ -197,17 +194,61 @@ export default function Blogs() {
               />
             </div>
           ))}
+
+          <Box display="flex" p={"$2"} flexWrap="wrap" >
+            {publishedData.map((data, index) => (
+              <div key={index}>
+                <Link href={`/blog/${data.id}`}>
+                  <Heading
+                    fontSize={"$xl"}
+                    position="relative"
+                    top={"$2"}
+                    sx={{
+                      "@base": {
+                        fontSize: "$md",
+                      },
+                      "@md": {
+                        fontSize: "$xl",
+                      },
+                      "@lg": {
+                        fontSize: "$xl",
+                      },
+                    }}
+                  >
+                    {data.title}
+                  </Heading>
+                </Link>
+
+                
+                <Box display="flex" flexDirection="row">
+                <p className="blog-content">{data.description}</p>
+
+                <Image
+                  size="lg"
+                  marginTop={"-$7"}
+                  source={{
+                    uri: data.image,
+                  }}
+                  marginLeft={"$4"}
+                  alt="blog-image"
+                />
+              </Box>
+                
+
+                <Box
+                  borderBottomColor="$secondary200"
+                  borderBottomWidth="$1"
+                  paddingTop={"$10"}
+                />
+              </div>
+            ))}
+          </Box>
         </Box>
       </Box>
 
-      <Box
-        borderLeftColor="$secondary200"
-        borderLeftWidth="$1"
-        position="relative"
-        right={"$80"}
-      />
-      <Staffpicks />
-      
+      <Box pl={"$4"} borderLeftColor="$secondary200" borderLeftWidth="$1">
+        <Staffpicks />
+      </Box>
     </Box>
   );
 }

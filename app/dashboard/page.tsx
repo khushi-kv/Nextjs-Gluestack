@@ -1,36 +1,55 @@
 "use client";
 import {
   Box,
+  Input,
+  Icon,
+  InputField,
   Button,
   ButtonText,
-  Input,
-  InputField,
+  EditIcon,
+  SearchIcon,
+  BellIcon,
   Avatar,
   AvatarFallbackText,
-  Icon,
-  SearchIcon,
-  EditIcon,
-  BellIcon,
 } from "@gluestack-ui/themed";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import React from "react";
-import Login from "../components/login/login";
+
 import Blogs from "../components/blogs/blogs";
-import Write from "../components/write/write";
+
 import { Store, useAuth } from "../context/store";
 import "../../styles/dashboard.css";
+
+import Write from "../components/write/write";
+import Login from "../components/login/login";
 export default function Dashboard() {
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [showModal1, setShowModal1] = useState<boolean>(false);
+  const [publishedData, setPublishedData] = useState<any[]>([]);
+
+  const {
+    username,
+    isLoggedIn,
+    showModal,
+    showModal1,
+    setShowModal,
+    setShowModal1,
+    handleLogin,
+  } = useAuth();
+
   const ref = React.useRef(null);
-  // const [username, setUsername] = useState<string>("");
-  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const { username, isLoggedIn, handleLogin } = useAuth();
-  // const handleLogin = (loggedInUsername: any) => {
-  //   setUsername(loggedInUsername);
-  //   setIsLoggedIn(true);
-  // };
+  const handlePublish = (data: {
+    title: string;
+    description: string;
+    selectedFile: any;
+  }) => {
+    const newItem = {
+      title: data.title,
+      description: data.description,
+      image: data.selectedFile,
+    };
+
+    setPublishedData((prevData) => [...prevData, newItem]);
+  };
 
   return (
     <Store>
@@ -75,27 +94,39 @@ export default function Dashboard() {
           <Box
             display="flex"
             flexDirection="row"
-            gap={"$6"}
+            gap={"$8"}
             position="absolute"
             right={30}
           >
-           
-              <div style={{
-                position:"relative",left:"35px"
-              }}><Icon as={EditIcon} m="$2" w="$7" h="$5" /></div>
-              <Button
-                position="relative"
-                left={"$2"}
-                padding={"$0"}
-                bgColor="white"
-                onPress={() => setShowModal1(true)}
-                ref={ref}
-              >
-                <ButtonText color="$black" fontWeight="$thin">Write</ButtonText>
-              </Button>
-           
+            <div
+              style={{
+                position: "relative",
+                left: "50px",
+                top: "2px",
+              }}
+            >
+              <Icon as={EditIcon} m="$2" w="$10" h="$5" />
+            </div>
+            <Button
+              position="relative"
+              left={"$2"}
+              padding={"$0"}
+              bgColor="white"
+              onPress={() => setShowModal1(true)}
+              ref={ref}
+            >
+              <ButtonText color="$black" fontWeight="$thin" fontSize={"$sm"}>
+                Write
+              </ButtonText>
+            </Button>
 
-            <Icon as={BellIcon} w="$6" h="$6" marginTop={"$2"} />
+            <Icon
+              as={BellIcon}
+              w="$6"
+              h="$6"
+              marginTop={"$2"}
+              fontWeight={"$light"}
+            />
             {isLoggedIn ? (
               <Avatar
                 bgColor="$rose600"
@@ -120,13 +151,18 @@ export default function Dashboard() {
             )}
           </Box>
         </Box>
-        <Blogs />
+
+        <Blogs publishedData={publishedData} />
         <Login
           showModal={showModal}
           setShowModal={setShowModal}
           onLogin={handleLogin}
         />
-        <Write showModal1={showModal1} setShowModal1={setShowModal1} />
+        <Write
+          showModal1={showModal1}
+          setShowModal1={setShowModal1}
+          onPublish={handlePublish}
+        />
       </main>
     </Store>
   );

@@ -3,15 +3,13 @@ import React from "react";
 import staffpicksdata from "../../../data/staffpicks.json";
 import Recommendedtopics from "../recommendedpicks/recommendedtopics";
 import Profile from "../profile/profile";
-import Write from "../write/write";
-
 export default function Staffpicks() {
   function staffsection() {
     return staffpicksdata;
   }
   const data = staffsection();
   return (
-    <Box position="relative" right={"$80"} padding={"$1"} paddingTop={"$4"}>
+    <Box position="relative"  padding={"$1"} paddingTop={"$4"} paddingLeft={"$6"}>
       <Heading
         fontSize={"$md"}
         position="relative"

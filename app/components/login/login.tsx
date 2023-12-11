@@ -25,22 +25,25 @@ import {
   ButtonText,
   AlertCircleIcon,
 } from "@gluestack-ui/themed";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../context/store";
 export default function Login({ showModal, setShowModal, onLogin }: any) {
-  // const [username, setUsername] = useState<string>("");
-  // const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
   const ref = React.useRef(null);
   const { username, isUsernameValid, handleUsernameChange, setIsLoggedIn } =
     useAuth();
   const storeUsernameLocally = (username: string) => {
     localStorage.setItem("username", username);
   };
-  // const handleUsernameChange = (event: any) => {
-  //   const newUsername = event.target.value;
-  //   setUsername(newUsername);
-  //   setIsUsernameValid(newUsername.length >= 3);
-  // };
+  const getStoredUsername = () => {
+    const storedValue = localStorage.getItem("username");
+    return storedValue !== null ? storedValue : "";
+  };
+  useEffect(() => {
+    const storedUsername = getStoredUsername();
+    if (storedUsername) {
+      console.log("Stored username:", storedUsername);
+    }
+  }, []);
   const isFormValid = username.trim() !== "" && isUsernameValid;
   const redirectToDashboard = () => {
     if (isFormValid) {
@@ -49,6 +52,7 @@ export default function Login({ showModal, setShowModal, onLogin }: any) {
       storeUsernameLocally(username);
     }
   };
+
   return (
     <Center h={300}>
       <Modal

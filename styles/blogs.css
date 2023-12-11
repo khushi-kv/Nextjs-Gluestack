@@ -7,11 +7,15 @@
   font-size: 16px;
   max-width: 100%;
   font-weight: 100;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
   font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times,
     serif;
   line-height: 24px;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 @media only screen and (max-width: 425px) {
