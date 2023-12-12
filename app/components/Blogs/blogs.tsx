@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import Blog from "../../../data/blogposts.json";
 import Link from "next/link";
 import {
@@ -12,13 +12,16 @@ import {
 import "/styles/blogs.css";
 import { Image } from "@gluestack-ui/themed";
 import Staffpicks from "../staffpicks/staffpicks";
+import { useAuth } from "@/app/context/store";
 
 export default function Blogs({ publishedData }: { publishedData: any[] }) {
+ 
   function blogdata() {
     return Blog;
   }
   const data = blogdata();
-
+ 
+  
   return (
     <Box
       display="flex"
@@ -242,6 +245,7 @@ export default function Blogs({ publishedData }: { publishedData: any[] }) {
                 />
               </div>
             ))}
+            
           </Box>
         </Box>
       </Box>

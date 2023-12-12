@@ -15,17 +15,15 @@ import {
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import React from "react";
-
 import Blogs from "../components/blogs/blogs";
-
 import { Store, useAuth } from "../context/store";
 import "../../styles/dashboard.css";
-
 import Write from "../components/write/write";
 import Login from "../components/login/login";
+import { useRouter } from "next/navigation";
 export default function Dashboard() {
   const [publishedData, setPublishedData] = useState<any[]>([]);
-
+  const router = useRouter();
   const {
     username,
     isLoggedIn,
@@ -34,6 +32,7 @@ export default function Dashboard() {
     setShowModal,
     setShowModal1,
     handleLogin,
+    handleLogout,
   } = useAuth();
 
   const ref = React.useRef(null);
@@ -47,9 +46,26 @@ export default function Dashboard() {
       description: data.description,
       image: data.selectedFile,
     };
-
-    setPublishedData((prevData) => [...prevData, newItem]);
+    const storedData = JSON.parse(
+      localStorage.getItem("publishedData") || "[]"
+    );
+    localStorage.setItem(
+      "publishedData",
+      JSON.stringify([...storedData, newItem])
+    );
   };
+
+  useEffect(() => {
+    const storedData = JSON.parse(
+      localStorage.getItem("publishedData") || "[]"
+    );
+    setPublishedData(storedData);
+  }, []);
+  // const handleClearLocalStorage = () => {
+  //   console.log("clear...");
+  //   localStorage.removeItem("publishedData");
+  //   setPublishedData([]);
+  // };
 
   return (
     <Store>
@@ -73,24 +89,22 @@ export default function Dashboard() {
             height={40}
             priority={true}
           />
-          {isLoggedIn ? (
-            <Input
-              variant="rounded"
-              size="md"
-              maxWidth={"$1/6"}
-              marginLeft={"$6"}
-              isDisabled={false}
-              isInvalid={false}
-              isReadOnly={false}
-              borderColor="#F9F9F9"
-              bg="#F9F9F9"
-            >
-              <Icon as={SearchIcon} w="$5" h="$6" marginTop={"$2"} />
-              <InputField placeholder="Search" />
-            </Input>
-          ) : (
-            " "
-          )}
+
+          <Input
+            variant="rounded"
+            size="md"
+            maxWidth={"$1/6"}
+            marginLeft={"$6"}
+            isDisabled={false}
+            isInvalid={false}
+            isReadOnly={false}
+            borderColor="#F9F9F9"
+            bg="#F9F9F9"
+          >
+            <Icon as={SearchIcon} w="$5" h="$6" marginTop={"$2"} />
+            <InputField placeholder="Search" />
+          </Input>
+
           <Box
             display="flex"
             flexDirection="row"
@@ -107,6 +121,7 @@ export default function Dashboard() {
             >
               <Icon as={EditIcon} m="$2" w="$10" h="$5" />
             </div>
+
             <Button
               position="relative"
               left={"$2"}
@@ -127,7 +142,11 @@ export default function Dashboard() {
               marginTop={"$2"}
               fontWeight={"$light"}
             />
-            {isLoggedIn ? (
+            {/* <Button size="sm" variant="solid" bg="red" onPress={handleClearLocalStorage}>
+          <ButtonText>Clear localStorage</ButtonText>
+        </Button> */}
+
+            <>
               <Avatar
                 bgColor="$rose600"
                 size="sm"
@@ -137,18 +156,10 @@ export default function Dashboard() {
               >
                 <AvatarFallbackText>{username}</AvatarFallbackText>
               </Avatar>
-            ) : (
-              <Button
-                size="sm"
-                variant="solid"
-                bg="black"
-                action="secondary"
-                onPress={() => setShowModal(true)}
-                ref={ref}
-              >
-                <ButtonText>Get Started</ButtonText>
+              <Button size="sm" action="primary" onPress={handleLogout}>
+                <ButtonText>Logout</ButtonText>
               </Button>
-            )}
+            </>
           </Box>
         </Box>
 
@@ -158,6 +169,7 @@ export default function Dashboard() {
           setShowModal={setShowModal}
           onLogin={handleLogin}
         />
+
         <Write
           showModal1={showModal1}
           setShowModal1={setShowModal1}

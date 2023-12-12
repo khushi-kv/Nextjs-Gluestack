@@ -1,3 +1,4 @@
+
 import {
   Box,
   Input,
@@ -26,14 +27,17 @@ import {
   AlertCircleIcon,
 } from "@gluestack-ui/themed";
 import React, { useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import { useAuth } from "../../context/store";
-export default function Login({ showModal, setShowModal, onLogin }: any) {
+export default function Login({ showModal, setShowModal, onLogin,onLogout }: any) {
+  const router=useRouter();
   const ref = React.useRef(null);
-  const { username, isUsernameValid, handleUsernameChange, setIsLoggedIn } =
+  const { username, isUsernameValid, handleUsernameChange, setIsLoggedIn,storeUsernameLocally } =
     useAuth();
-  const storeUsernameLocally = (username: string) => {
-    localStorage.setItem("username", username);
-  };
+  // const storeUsernameLocally = (username: string) => {
+  //   localStorage.setItem("username", username);
+  // };
+ 
   const getStoredUsername = () => {
     const storedValue = localStorage.getItem("username");
     return storedValue !== null ? storedValue : "";
@@ -47,9 +51,12 @@ export default function Login({ showModal, setShowModal, onLogin }: any) {
   const isFormValid = username.trim() !== "" && isUsernameValid;
   const redirectToDashboard = () => {
     if (isFormValid) {
+      console.log("Logging in with username:", username);
       onLogin(username);
       setIsLoggedIn(true);
       storeUsernameLocally(username);
+      router.push("/dashboard");
+
     }
   };
 
@@ -123,6 +130,7 @@ export default function Login({ showModal, setShowModal, onLogin }: any) {
               }}
             >
               <ButtonText>LogIn</ButtonText>
+               
             </Button>
           </ModalFooter>
         </ModalContent>

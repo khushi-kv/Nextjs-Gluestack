@@ -26,7 +26,7 @@ import {
   InputField,
 } from "@gluestack-ui/themed";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Write({ showModal1, setShowModal1, onPublish }: any) {
   const [title, setTitle] = useState("");
@@ -80,9 +80,19 @@ export default function Write({ showModal1, setShowModal1, onPublish }: any) {
     setShowModal1(false);
   };
 
- 
 
- 
+  // useEffect(() => {
+  //   console.log("Title from localStorage:", localStorage.getItem("publishedTitle"));
+  //   console.log("Description from localStorage:", localStorage.getItem("publishedDescription"));
+  //   console.log("Image from localStorage:", localStorage.getItem("publishedImage"));
+  
+  //   const Title = localStorage.getItem("publishedTitle") || "";
+  //   const Description = localStorage.getItem("publishedDescription") || "";
+  //   const Image = localStorage.getItem("publishedImage") || "";
+  
+   
+  // }, []);
+
   return (
     <Center h={800}>
       <Modal

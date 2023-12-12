@@ -1,22 +1,28 @@
 "use client";
-import React, { createContext, useState, useContext } from "react";
+import { useRouter } from "next/navigation";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 interface AuthContextType {
   username: string;
   isLoggedIn: boolean;
-  isUsernameValid:boolean;
-  showModal:boolean;
-  showModal1:boolean;
-  setShowModal:React.Dispatch<React.SetStateAction<boolean>>;
-  setShowModal1:React.Dispatch<React.SetStateAction<boolean>>;
+  isUsernameValid: boolean;
+  showModal: boolean;
+  showModal1: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowModal1: React.Dispatch<React.SetStateAction<boolean>>;
   handleLogin: (loggedInUsername: string) => void;
-  handleUsernameChange:(event:any)=>void;
+  handleLogout: () => void;
+  handleUsernameChange: (event: any) => void;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  storeUsernameLocally: (username: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const Store: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const Store: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
@@ -26,12 +32,28 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     setUsername(loggedInUsername);
     setIsLoggedIn(true);
   };
+  const handleLogout = () => {
+    storeUsernameLocally("");
+    setIsLoggedIn(false);
+    setUsername("");
+    router.push("/");
+  };
   const handleUsernameChange = (event: any) => {
     const newUsername = event.target.value;
     setUsername(newUsername);
     setIsUsernameValid(newUsername.length >= 3);
   };
-  
+  const storeUsernameLocally = (username: string) => {
+    localStorage.setItem("username", username);
+  };
+  useEffect(() => {
+    const User = localStorage.getItem("username");
+    if (User) {
+      setIsLoggedIn(true);
+      setUsername(User);
+    }
+  }, []);
+
   const value: AuthContextType = {
     username,
     isLoggedIn,
@@ -41,8 +63,10 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     setShowModal,
     setShowModal1,
     handleLogin,
+    handleLogout,
     handleUsernameChange,
-    setIsLoggedIn
+    setIsLoggedIn,
+    storeUsernameLocally,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
