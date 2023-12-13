@@ -140,7 +140,7 @@ export default function Dashboard() {
               w="$6"
               h="$6"
               marginTop={"$2"}
-              fontWeight={"$light"}
+              color="$secondary300"
             />
             {/* <Button size="sm" variant="solid" bg="red" onPress={handleClearLocalStorage}>
           <ButtonText>Clear localStorage</ButtonText>

@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 interface AuthContextType {
+  ref:any;
   username: string;
   isLoggedIn: boolean;
   isUsernameValid: boolean;
@@ -28,6 +29,7 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
   const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal1, setShowModal1] = useState<boolean>(false);
+  const ref = React.useRef(null);
   const handleLogin = (loggedInUsername: string) => {
     setUsername(loggedInUsername);
     setIsLoggedIn(true);
@@ -55,6 +57,7 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const value: AuthContextType = {
+    ref,
     username,
     isLoggedIn,
     isUsernameValid,
