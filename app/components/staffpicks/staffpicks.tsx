@@ -9,7 +9,12 @@ export default function Staffpicks() {
   }
   const data = staffsection();
   return (
-    <Box position="relative"  padding={"$1"} paddingTop={"$4"} paddingLeft={"$6"}>
+    <Box
+      position="relative"
+      padding={"$1"}
+      paddingTop={"$4"}
+      paddingLeft={"$6"}
+    >
       <Heading
         fontSize={"$md"}
         position="relative"

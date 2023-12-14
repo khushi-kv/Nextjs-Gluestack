@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React from "react";
 import Blog from "../../../data/blogposts.json";
 import Link from "next/link";
 import {
@@ -12,16 +12,12 @@ import {
 import "/styles/blogs.css";
 import { Image } from "@gluestack-ui/themed";
 import Staffpicks from "../staffpicks/staffpicks";
-import { useAuth } from "@/app/context/store";
-
 export default function Blogs({ publishedData }: { publishedData: any[] }) {
- 
   function blogdata() {
     return Blog;
   }
   const data = blogdata();
- 
-  
+
   return (
     <Box
       display="flex"
@@ -198,7 +194,7 @@ export default function Blogs({ publishedData }: { publishedData: any[] }) {
             </div>
           ))}
 
-          <Box display="flex" p={"$2"} flexWrap="wrap" >
+          <Box display="flex" p={"$2"} flexWrap="wrap">
             {publishedData.map((data, index) => (
               <div key={index}>
                 <Link href={`/blog/${data.id}`}>
@@ -222,21 +218,19 @@ export default function Blogs({ publishedData }: { publishedData: any[] }) {
                   </Heading>
                 </Link>
 
-                
                 <Box display="flex" flexDirection="row">
-                <p className="blog-content">{data.description}</p>
+                  <p className="blog-content">{data.description}</p>
 
-                <Image
-                  size="lg"
-                  marginTop={"-$7"}
-                  source={{
-                    uri: data.image,
-                  }}
-                  marginLeft={"$4"}
-                  alt="blog-image"
-                />
-              </Box>
-                
+                  <Image
+                    size="lg"
+                    marginTop={"-$7"}
+                    source={{
+                      uri: data.image,
+                    }}
+                    marginLeft={"$4"}
+                    alt="blog-image"
+                  />
+                </Box>
 
                 <Box
                   borderBottomColor="$secondary200"
@@ -245,7 +239,6 @@ export default function Blogs({ publishedData }: { publishedData: any[] }) {
                 />
               </div>
             ))}
-            
           </Box>
         </Box>
       </Box>

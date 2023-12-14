@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 interface AuthContextType {
-  ref:any;
+  ref: any;
   username: string;
   isLoggedIn: boolean;
   isUsernameValid: boolean;
@@ -16,6 +16,12 @@ interface AuthContextType {
   handleUsernameChange: (event: any) => void;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   storeUsernameLocally: (username: string) => void;
+  handleClearLocalStorage: () => void;
+  handlePublish: (data: {
+    title: string;
+    description: string;
+    selectedFile: any;
+  }) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,6 +35,7 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
   const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal1, setShowModal1] = useState<boolean>(false);
+  const [publishedData, setPublishedData] = useState<string[]>([]);
   const ref = React.useRef(null);
   const handleLogin = (loggedInUsername: string) => {
     setUsername(loggedInUsername);
@@ -55,7 +62,36 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
       setUsername(User);
     }
   }, []);
+  const handlePublish = (data: {
+    title: string;
+    description: string;
+    selectedFile: any;
+  }) => {
+    const newItem = {
+      title: data.title,
+      description: data.description,
+      image: data.selectedFile,
+    };
+    const storedData = JSON.parse(
+      localStorage.getItem("publishedData") || "[]"
+    );
+    localStorage.setItem(
+      "publishedData",
+      JSON.stringify([...storedData, newItem])
+    );
+  };
 
+  useEffect(() => {
+    const storedData = JSON.parse(
+      localStorage.getItem("publishedData") || "[]"
+    );
+    setPublishedData(storedData);
+  }, []);
+  const handleClearLocalStorage = () => {
+    console.log("clear...");
+    localStorage.removeItem("publishedData");
+    setPublishedData([]);
+  };
   const value: AuthContextType = {
     ref,
     username,
@@ -70,6 +106,8 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
     handleUsernameChange,
     setIsLoggedIn,
     storeUsernameLocally,
+    handlePublish,
+    handleClearLocalStorage,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
