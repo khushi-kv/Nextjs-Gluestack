@@ -2,17 +2,20 @@
     {
         "id":"1",
         "title":"ChatGPT, or: How I Learned to Stop Worrying and Love AI",
-        "name":"Lessig"
+        "name":"Lessig",
+        "image":"https://as2.ftcdn.net/v2/jpg/05/45/78/63/1000_F_545786380_R6yFxFYigE1jyqlWwTOMANaeitHN79Mi.jpg"
     },
     {
         "id":"2",
         "title":"Trying to Innovate? Put down your hammer",
-        "name":"Lyman Stone"
+        "name":"Lyman Stone",
+        "image":"https://as2.ftcdn.net/v2/jpg/05/45/78/63/1000_F_545786380_R6yFxFYigE1jyqlWwTOMANaeitHN79Mi.jpg"
     },
     {
         "id":"3",
         "title":"Trying to Innovate? Put down your hammer.",
-        "name":"rachel audige"
+        "name":"rachel audige",
+         "image":"https://as2.ftcdn.net/v2/jpg/05/45/78/63/1000_F_545786380_R6yFxFYigE1jyqlWwTOMANaeitHN79Mi.jpg"
     }
 
 ]

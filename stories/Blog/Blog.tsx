@@ -1,5 +1,5 @@
 import React from "react";
-import Blog from "../../../data/blogposts.json";
+import Blog from "../../data/blogposts.json";
 import Link from "next/link";
 import {
   AvatarImage,
@@ -11,9 +11,13 @@ import {
 } from "@gluestack-ui/themed";
 import "/styles/blogs.css";
 import { Image } from "@gluestack-ui/themed";
-import Staffpicks from "../staffpicks/staffpicks";
+// import Staffpicks from "@/app/components/staffpicks/staffpicks";
 import { BlogPublish } from "@/app/dashboard/page";
-export default function Blogs({ publishedData }: { publishedData: BlogPublish[] }) {
+export default function Blogs({
+  publishedData,
+}: {
+  publishedData: BlogPublish[];
+}) {
   function blogdata() {
     return Blog;
   }
@@ -59,13 +63,14 @@ export default function Blogs({ publishedData }: { publishedData: BlogPublish[] 
               >
                 <AvatarImage
                   source={{
-                    uri: post.avatar ,
+                    uri: post.avatar,
                   }}
+                  marginTop={"$4"}
                   size="lg"
                   width={30}
                   height={30}
                 />
-                
+
                 <Box
                   display="flex"
                   flexDirection="row"
@@ -198,11 +203,20 @@ export default function Blogs({ publishedData }: { publishedData: BlogPublish[] 
           <Box display="flex" p={"$2"} flexWrap="wrap">
             {publishedData.map((data, index) => (
               <div key={index}>
+                <AvatarImage
+                  source={{
+                    uri: data.avatar,
+                  }}
+                  width={30}
+                  height={30}
+                  marginTop={"$2"}
+                />
                 <Link href={`/blog/${data.id}`}>
                   <Heading
                     fontSize={"$xl"}
                     position="relative"
                     top={"$2"}
+                    left={"$10"}
                     sx={{
                       "@base": {
                         fontSize: "$md",
@@ -242,10 +256,6 @@ export default function Blogs({ publishedData }: { publishedData: BlogPublish[] 
             ))}
           </Box>
         </Box>
-      </Box>
-
-      <Box pl={"$4"} borderLeftColor="$secondary200" borderLeftWidth="$1">
-        <Staffpicks />
       </Box>
     </Box>
   );

@@ -8,6 +8,7 @@ export interface BlogPublish {
   title: string;
   description: string;
   image: string;
+  avatar:string;
 }
 
 export default function Dashboard() {
