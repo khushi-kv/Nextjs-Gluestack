@@ -20,7 +20,7 @@ interface AuthContextType {
   handlePublish: (data: {
     title: string;
     description: string;
-    selectedFile: any;
+    selectedFile: string;
   }) => void;
 }
 
@@ -65,7 +65,7 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
   const handlePublish = (data: {
     title: string;
     description: string;
-    selectedFile: any;
+    selectedFile: string;
   }) => {
     const newItem = {
       title: data.title,

@@ -138,6 +138,14 @@ export default function page({
                 </Box>
               </Box>
             </Box>
+            <Image
+                source={{
+                  uri: currentBlog.image,
+                }}
+                width={700}
+                height={400}
+              mt={"$20"}
+              />
             <Text
               pt={"$20"}
               pl={"$2"}
@@ -147,14 +155,7 @@ export default function page({
               // width="66%"
               fontWeight="100"
             >
-              {/* <Image
-                source={{
-                  uri: currentBlog.image,
-                }}
-                width={40}
-                height={27}
-                marginTop={"$2"}
-              /> */}
+            
               {currentBlog.content}
             </Text>
 

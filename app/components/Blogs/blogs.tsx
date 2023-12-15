@@ -12,7 +12,8 @@ import {
 import "/styles/blogs.css";
 import { Image } from "@gluestack-ui/themed";
 import Staffpicks from "../staffpicks/staffpicks";
-export default function Blogs({ publishedData }: { publishedData: any[] }) {
+import { BlogPublish } from "@/app/dashboard/page";
+export default function Blogs({ publishedData }: { publishedData: BlogPublish[] }) {
   function blogdata() {
     return Blog;
   }

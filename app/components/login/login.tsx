@@ -28,12 +28,16 @@ import {
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/store";
+interface LoginProps {
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  onLogin: (username: string) => void;
+}
 export default function Login({
   showModal,
   setShowModal,
   onLogin,
-  onLogout,
-}: any) {
+}: LoginProps) {
   const router = useRouter();
   const ref = React.useRef(null);
   const {

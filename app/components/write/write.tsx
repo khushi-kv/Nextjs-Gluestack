@@ -26,9 +26,22 @@ import {
   InputField,
 } from "@gluestack-ui/themed";
 
-import React, { useState, useEffect } from "react";
+import React, { useState  } from "react";
+interface WriteProps {
+  showModal1: boolean;
+  setShowModal1: React.Dispatch<React.SetStateAction<boolean>>;
+  onPublish: (data: {
+    title: string;
+    description: string;
+    selectedFile: any | null;
+  }) => void;
+}
 
-export default function Write({ showModal1, setShowModal1, onPublish }: any) {
+export default function Write({
+  showModal1,
+  setShowModal1,
+  onPublish,
+}: WriteProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isTitleValid, setIsTitleValid] = useState(false);
