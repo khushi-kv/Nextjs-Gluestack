@@ -53,6 +53,61 @@ export default function Blogs({
         // width={"$6/12"}
       >
         <Box display="flex" flexWrap="wrap">
+          <Box display="flex" p={"$2"} flexWrap="wrap">
+            {publishedData.map((data, index) => (
+              <div key={index}>
+                <AvatarImage
+                  source={{
+                    uri: data.avatar,
+                  }}
+                  width={30}
+                  height={30}
+                  marginTop={"$2"}
+                />
+                <Link href={`/blog/${data.id}`}>
+                  <Heading
+                    fontSize={"$xl"}
+                    position="relative"
+                    top={"$2"}
+                    left={"$10"}
+                    sx={{
+                      "@base": {
+                        fontSize: "$md",
+                      },
+                      "@md": {
+                        fontSize: "$xl",
+                      },
+                      "@lg": {
+                        fontSize: "$xl",
+                      },
+                    }}
+                  >
+                    {data.title}
+                  </Heading>
+                </Link>
+
+                <Box display="flex" flexDirection="row">
+                  <p className="blog-content">{data.description}</p>
+
+                  <Image
+                    size="lg"
+                    marginTop={"-$7"}
+                    source={{
+                      uri: data.image,
+                    }}
+                    marginLeft={"$4"}
+                    alt="blog-image"
+                  />
+                </Box>
+
+                <Box
+                  borderBottomColor="$secondary200"
+                  borderBottomWidth="$1"
+                  paddingTop={"$10"}
+                />
+              </div>
+            ))}
+          </Box>
           {data.map((post) => (
             <div key={post.id}>
               <Box
@@ -199,62 +254,6 @@ export default function Blogs({
               />
             </div>
           ))}
-
-          <Box display="flex" p={"$2"} flexWrap="wrap">
-            {publishedData.map((data, index) => (
-              <div key={index}>
-                <AvatarImage
-                  source={{
-                    uri: data.avatar,
-                  }}
-                  width={30}
-                  height={30}
-                  marginTop={"$2"}
-                />
-                <Link href={`/blog/${data.id}`}>
-                  <Heading
-                    fontSize={"$xl"}
-                    position="relative"
-                    top={"$2"}
-                    left={"$10"}
-                    sx={{
-                      "@base": {
-                        fontSize: "$md",
-                      },
-                      "@md": {
-                        fontSize: "$xl",
-                      },
-                      "@lg": {
-                        fontSize: "$xl",
-                      },
-                    }}
-                  >
-                    {data.title}
-                  </Heading>
-                </Link>
-
-                <Box display="flex" flexDirection="row">
-                  <p className="blog-content">{data.description}</p>
-
-                  <Image
-                    size="lg"
-                    marginTop={"-$7"}
-                    source={{
-                      uri: data.image,
-                    }}
-                    marginLeft={"$4"}
-                    alt="blog-image"
-                  />
-                </Box>
-
-                <Box
-                  borderBottomColor="$secondary200"
-                  borderBottomWidth="$1"
-                  paddingTop={"$10"}
-                />
-              </div>
-            ))}
-          </Box>
         </Box>
       </Box>
     </Box>

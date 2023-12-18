@@ -10,15 +10,22 @@ import {
   ThreeDotsIcon,
 } from "@gluestack-ui/themed";
 import "/styles/blogs.css";
+// import styles from "./blogs.module.css";
 import { Image } from "@gluestack-ui/themed";
 import Staffpicks from "../staffpicks/staffpicks";
 import { BlogPublish } from "@/app/dashboard/page";
-export default function Blogs({ publishedData }: { publishedData: BlogPublish[] }) {
+export default function Blogs({
+  publishedData,
+}: {
+  publishedData: BlogPublish[];
+}) {
   function blogdata() {
     return Blog;
   }
   const data = blogdata();
-
+  // const testing = {
+  //   backgroundColor: "$rose400",
+  // };
   return (
     <Box
       display="flex"
@@ -30,25 +37,93 @@ export default function Blogs({ publishedData }: { publishedData: BlogPublish[] 
         padding={"$20"}
         width={"56%"}
         paddingLeft={"$20"}
-        // sx={{
-        //   "@base": {
-        //     // bg: "$red500",
-        //     padding: "$2",
-        //   },
-        //   "@md": {
-        //     // bg: "$green500",
-        //     padding: "$4",
-        //   },
-        //   "@lg": {
-        //     // bg: "$blue500",
-        //     padding: "$20",
-        //     // paddingLeft: "$40",
-        //   },
-        // }}
+        sx={{
+          "@base": {
+            // bg: "$red500",
+            padding: "$3",
+            paddingRight: "$2",
+            width: "100%",
+          },
+          "@md": {
+            // bg: "$green500",
+            padding: "$4",
+          },
+          "@lg": {
+            // bg: "$blue500",
+            padding: "$20",
+            width: "56%",
+            // paddingLeft: "$40",
+          },
+        }}
 
         // width={"$6/12"}
       >
         <Box display="flex" flexWrap="wrap">
+          <Box display="flex" p={"$2"} flexWrap="wrap">
+            {publishedData.map((data, index) => (
+              <div key={index}>
+                <Link href={`/blog/${data.id}`}>
+                  <Heading
+                    fontSize={"$xl"}
+                    position="relative"
+                    top={"$2"}
+                    sx={{
+                      "@base": {
+                        fontSize: "$md",
+                      },
+                      "@md": {
+                        fontSize: "$xl",
+                      },
+                      "@lg": {
+                        fontSize: "$xl",
+                      },
+                    }}
+                  >
+                    {data.title}
+                  </Heading>
+                </Link>
+
+                <Box display="flex" flexDirection="row">
+                  <p className="blog-content">{data.description}</p>
+
+                  <Image
+                    size="lg"
+                    marginTop={"-$7"}
+                    source={{
+                      uri: data.image,
+                    }}
+                    marginLeft={"$4"}
+                    alt="blog-image"
+                    sx={{
+                      
+                        "@base": {
+                        display:"none"
+                        // bgColor:"$rose200"
+                        },
+                        "@md": {
+                         display:"block",
+                         position:"absolute",
+                         right:"$1",
+                          // bgColor:"$green200"
+                        },
+                        "@lg": {
+                          position:"relative",
+                         right:"$0",
+                         top:"$7"
+                          // bgColor:"$amber300"
+                        },
+                    }}
+                  />
+                </Box>
+
+                <Box
+                  borderBottomColor="$secondary200"
+                  borderBottomWidth="$1"
+                  paddingTop={"$10"}
+                />
+              </div>
+            ))}
+          </Box>
           {data.map((post) => (
             <div key={post.id}>
               <Box
@@ -59,13 +134,13 @@ export default function Blogs({ publishedData }: { publishedData: BlogPublish[] 
               >
                 <AvatarImage
                   source={{
-                    uri: post.avatar ,
+                    uri: post.avatar,
                   }}
                   size="lg"
                   width={30}
                   height={30}
                 />
-                
+
                 <Box
                   display="flex"
                   flexDirection="row"
@@ -103,12 +178,25 @@ export default function Blogs({ publishedData }: { publishedData: BlogPublish[] 
 
                 <Image
                   size="lg"
+                
                   marginTop={"-$7"}
                   source={{
                     uri: "https://whatfix.com/blog/wp-content/uploads/2021/09/digital-innovation.jpg",
                   }}
                   marginLeft={"$4"}
                   alt="blog-image"
+                  sx={{
+                    "@base": {
+                      display:"none",
+                    },
+                    "@md": {
+                    position:"relative",
+                    display:"block"
+                    },
+                    "@lg": {
+                   
+                    },
+                  }}
                 />
               </Box>
               <Box
@@ -194,57 +282,26 @@ export default function Blogs({ publishedData }: { publishedData: BlogPublish[] 
               />
             </div>
           ))}
-
-          <Box display="flex" p={"$2"} flexWrap="wrap">
-            {publishedData.map((data, index) => (
-              <div key={index}>
-                <Link href={`/blog/${data.id}`}>
-                  <Heading
-                    fontSize={"$xl"}
-                    position="relative"
-                    top={"$2"}
-                    sx={{
-                      "@base": {
-                        fontSize: "$md",
-                      },
-                      "@md": {
-                        fontSize: "$xl",
-                      },
-                      "@lg": {
-                        fontSize: "$xl",
-                      },
-                    }}
-                  >
-                    {data.title}
-                  </Heading>
-                </Link>
-
-                <Box display="flex" flexDirection="row">
-                  <p className="blog-content">{data.description}</p>
-
-                  <Image
-                    size="lg"
-                    marginTop={"-$7"}
-                    source={{
-                      uri: data.image,
-                    }}
-                    marginLeft={"$4"}
-                    alt="blog-image"
-                  />
-                </Box>
-
-                <Box
-                  borderBottomColor="$secondary200"
-                  borderBottomWidth="$1"
-                  paddingTop={"$10"}
-                />
-              </div>
-            ))}
-          </Box>
         </Box>
       </Box>
 
-      <Box pl={"$4"} borderLeftColor="$secondary200" borderLeftWidth="$1">
+      <Box
+        pl={"$4"}
+        // {...testing}
+        borderLeftColor="$secondary200"
+        borderLeftWidth="$1"
+        sx={{
+          "@base": {
+            display: "none",
+          },
+          "@md": {
+            display: "none",
+          },
+          "@lg": {
+            display: "block",
+          },
+        }}
+      >
         <Staffpicks />
       </Box>
     </Box>

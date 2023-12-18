@@ -50,6 +50,7 @@ export default function Header() {
           borderLeftWidth="$0"
           borderRightWidth="$0"
           h="$16"
+          
         >
           <Image
             source={{
@@ -73,9 +74,22 @@ export default function Header() {
                 isReadOnly={false}
                 borderColor="#F9F9F9"
                 bg="#F9F9F9"
+                sx={{
+                  "@base": {
+                    display:"none",
+                  },
+                  "@md": {
+                 
+                  display:"block"
+                  },
+                  "@lg": {
+                   
+                    display:"block"
+                  },
+                }}
               >
                 <Icon as={SearchIcon} w="$5" h="$6" marginTop={"$2"} />
-                <InputField placeholder="Search" />
+                <InputField placeholder="Search"  />
               </Input>
               <Box
                 display="flex"

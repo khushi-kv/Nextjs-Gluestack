@@ -29,8 +29,39 @@ export default function page({
   }
   return (
     <main>
-      <Box p={"$20"} pl={"$96"}>
-        <Box pt={"$8"} maxWidth={"70%"}>
+      <Box p={"$20"} 
+      sx={{ 
+        "@base": {
+         pl:"$4",
+        },
+        "@md": {
+          pl:"$16",
+        },
+        "@lg": {
+          pl:"$72"
+        },
+        "@xl":{
+          pl:"$96"
+        }
+      }}
+      >
+        <Box pt={"$8"} 
+        sx={{ 
+          "@base": {
+          maxWidth:"100%",
+          // bgColor:"$rose200"
+          },
+          "@md": {
+            maxWidth:"100%",
+            // bgColor:"$green200"
+          },
+          "@lg": {
+            maxWidth:"80%",
+            // bgColor:"$amber300"
+          },
+          
+        }}
+        >
           <Heading fontSize={"$5xl"} lineHeight={"52px"}>
             {currentBlog.title}
           </Heading>
