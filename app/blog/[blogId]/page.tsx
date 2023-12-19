@@ -29,38 +29,39 @@ export default function page({
   }
   return (
     <main>
-      <Box p={"$20"} 
-      sx={{ 
-        "@base": {
-         pl:"$4",
-        },
-        "@md": {
-          pl:"$16",
-        },
-        "@lg": {
-          pl:"$72"
-        },
-        "@xl":{
-          pl:"$96"
-        }
-      }}
-      >
-        <Box pt={"$8"} 
-        sx={{ 
+      <Box
+        p={"$20"}
+        sx={{
           "@base": {
-          maxWidth:"100%",
-          // bgColor:"$rose200"
+            pl: "$4",
           },
           "@md": {
-            maxWidth:"100%",
-            // bgColor:"$green200"
+            pl: "$16",
           },
           "@lg": {
-            maxWidth:"80%",
-            // bgColor:"$amber300"
+            pl: "$72",
           },
-          
+          "@xl": {
+            pl: "$96",
+          },
         }}
+      >
+        <Box
+          pt={"$8"}
+          sx={{
+            "@base": {
+              maxWidth: "100%",
+              // bgColor:"$rose200"
+            },
+            "@md": {
+              maxWidth: "100%",
+              // bgColor:"$green200"
+            },
+            "@lg": {
+              maxWidth: "80%",
+              // bgColor:"$amber300"
+            },
+          }}
         >
           <Heading fontSize={"$5xl"} lineHeight={"52px"}>
             {currentBlog.title}
@@ -170,13 +171,13 @@ export default function page({
               </Box>
             </Box>
             <Image
-                source={{
-                  uri: currentBlog.image,
-                }}
-                width={700}
-                height={400}
+              source={{
+                uri: currentBlog.image,
+              }}
+              width={700}
+              height={400}
               mt={"$20"}
-              />
+            />
             <Text
               pt={"$20"}
               pl={"$2"}
@@ -186,7 +187,6 @@ export default function page({
               // width="66%"
               fontWeight="100"
             >
-            
               {currentBlog.content}
             </Text>
 

@@ -24,10 +24,7 @@ type StaffpicksStoryArgs = {
 const Template: Story = (args) => <Staffpicks data={[]} {...args} />;
 
 // Example story with data passed as props
-export const DefaultStaffPicks = Template.bind({});
-DefaultStaffPicks.args = {
-  data: data,
-};
+
 export const CustomStaffPicks = Template.bind({});
 CustomStaffPicks.args = {
   data: [

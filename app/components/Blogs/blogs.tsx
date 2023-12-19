@@ -14,6 +14,15 @@ import "/styles/blogs.css";
 import { Image } from "@gluestack-ui/themed";
 import Staffpicks from "../staffpicks/staffpicks";
 import { BlogPublish } from "@/app/dashboard/page";
+import {
+  BlogStyle,
+  PublishDataHeading,
+  PublishDataImage,
+  BlogHeading,
+  BlogImage,
+  BlogTag,
+  BorderStyle,
+} from "./blogStyles";
 export default function Blogs({
   publishedData,
 }: {
@@ -23,9 +32,7 @@ export default function Blogs({
     return Blog;
   }
   const data = blogdata();
-  // const testing = {
-  //   backgroundColor: "$rose400",
-  // };
+
   return (
     <Box
       display="flex"
@@ -33,31 +40,7 @@ export default function Blogs({
       justifyContent="space-evenly"
       width={"100%"}
     >
-      <Box
-        padding={"$20"}
-        width={"56%"}
-        paddingLeft={"$20"}
-        sx={{
-          "@base": {
-            // bg: "$red500",
-            padding: "$3",
-            paddingRight: "$2",
-            width: "100%",
-          },
-          "@md": {
-            // bg: "$green500",
-            padding: "$4",
-          },
-          "@lg": {
-            // bg: "$blue500",
-            padding: "$20",
-            width: "56%",
-            // paddingLeft: "$40",
-          },
-        }}
-
-        // width={"$6/12"}
-      >
+      <Box padding={"$20"} width={"56%"} paddingLeft={"$20"} sx={BlogStyle}>
         <Box display="flex" flexWrap="wrap">
           <Box display="flex" p={"$2"} flexWrap="wrap">
             {publishedData.map((data, index) => (
@@ -67,17 +50,7 @@ export default function Blogs({
                     fontSize={"$xl"}
                     position="relative"
                     top={"$2"}
-                    sx={{
-                      "@base": {
-                        fontSize: "$md",
-                      },
-                      "@md": {
-                        fontSize: "$xl",
-                      },
-                      "@lg": {
-                        fontSize: "$xl",
-                      },
-                    }}
+                    sx={PublishDataHeading}
                   >
                     {data.title}
                   </Heading>
@@ -94,25 +67,7 @@ export default function Blogs({
                     }}
                     marginLeft={"$4"}
                     alt="blog-image"
-                    sx={{
-                      
-                        "@base": {
-                        display:"none"
-                        // bgColor:"$rose200"
-                        },
-                        "@md": {
-                         display:"block",
-                         position:"absolute",
-                         right:"$1",
-                          // bgColor:"$green200"
-                        },
-                        "@lg": {
-                          position:"relative",
-                         right:"$0",
-                         top:"$7"
-                          // bgColor:"$amber300"
-                        },
-                    }}
+                    sx={PublishDataImage}
                   />
                 </Box>
 
@@ -158,17 +113,7 @@ export default function Blogs({
                   fontSize={"$xl"}
                   position="relative"
                   top={"$2"}
-                  sx={{
-                    "@base": {
-                      fontSize: "$md",
-                    },
-                    "@md": {
-                      fontSize: "$xl",
-                    },
-                    "@lg": {
-                      fontSize: "$xl",
-                    },
-                  }}
+                  sx={BlogHeading}
                 >
                   {post.title}
                 </Heading>
@@ -178,45 +123,16 @@ export default function Blogs({
 
                 <Image
                   size="lg"
-                
                   marginTop={"-$7"}
                   source={{
                     uri: "https://whatfix.com/blog/wp-content/uploads/2021/09/digital-innovation.jpg",
                   }}
                   marginLeft={"$4"}
                   alt="blog-image"
-                  sx={{
-                    "@base": {
-                      display:"none",
-                    },
-                    "@md": {
-                    position:"relative",
-                    display:"block"
-                    },
-                    "@lg": {
-                   
-                    },
-                  }}
+                  sx={BlogImage}
                 />
               </Box>
-              <Box
-                display="flex"
-                flexDirection="row"
-                gap={"$32"}
-                sx={{
-                  "@base": {
-                    gap: "$4",
-                  },
-                  "@md": {
-                    // bg: "$green500",
-                    gap: "$32",
-                  },
-                  "@lg": {
-                    // bg: "$blue500",
-                    gap: "$32",
-                  },
-                }}
-              >
+              <Box display="flex" flexDirection="row" gap={"$32"} sx={BlogTag}>
                 <Box
                   display="flex"
                   flexDirection="row"
@@ -287,20 +203,9 @@ export default function Blogs({
 
       <Box
         pl={"$4"}
-        // {...testing}
         borderLeftColor="$secondary200"
         borderLeftWidth="$1"
-        sx={{
-          "@base": {
-            display: "none",
-          },
-          "@md": {
-            display: "none",
-          },
-          "@lg": {
-            display: "block",
-          },
-        }}
+        sx={BorderStyle}
       >
         <Staffpicks />
       </Box>

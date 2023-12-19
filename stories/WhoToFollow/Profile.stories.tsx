@@ -23,10 +23,6 @@ export default {
 const Template: Story = (args) => <Profile data={[]} {...args} />;
 
 // Example story with data passed as props
-export const DefaultProfile = Template.bind({});
-DefaultProfile.args = {
-  data: profile,
-};
 
 export const CustomProfile = Template.bind({});
 CustomProfile.args = {
