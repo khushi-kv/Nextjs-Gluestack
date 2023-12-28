@@ -1,12 +1,19 @@
 import { Box, Heading, Text } from "@gluestack-ui/themed";
 import React from "react";
 import recommendeddata from "../../../data/recommendedtopics.json";
+import { useAuth } from "@/app/context/store";
 export default function Recommendedtopics() {
+  const { setTag } = useAuth();
   function Recommendedsection() {
     return recommendeddata;
   }
   const data = Recommendedsection();
 
+  
+  const handleTagClick = (title: string) => {
+    setTag(title);
+    console.log("Clicked tag:", title);
+  };
   return (
     <Box paddingTop={"$4"}>
       <Heading
@@ -27,6 +34,7 @@ export default function Recommendedtopics() {
       >
         {data.map((data) => (
           <Text
+            key={data.title}
             backgroundColor="#F2F2F2"
             padding={"$2"}
             borderRadius={"$3xl"}
@@ -34,7 +42,11 @@ export default function Recommendedtopics() {
             maxWidth={120}
             marginTop={"$4"}
           >
-            <Text marginLeft={"$1"} fontSize={"$sm"}>
+            <Text
+              marginLeft={"$1"}
+              fontSize={"$sm"}
+              onPress={() => handleTagClick(data.title)}
+            >
               {data.title}
             </Text>
           </Text>

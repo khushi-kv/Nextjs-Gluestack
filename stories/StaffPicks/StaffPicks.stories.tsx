@@ -58,7 +58,7 @@ DifferentAvatarImages.args = {
     {
       id: 1,
       name: "John Doe",
-      title: "Blog Post",
+      title: "Trying to Innovate? Put down your hammer",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ3U4t_8ZYQaCeEMDx1PgP3PVkr2BdbpxkFA&usqp=CAU",
     },

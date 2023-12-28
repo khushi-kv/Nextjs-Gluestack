@@ -11,6 +11,12 @@ interface AuthContextType {
   showModal1: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   setShowModal1: React.Dispatch<React.SetStateAction<boolean>>;
+  publishedData:any;
+  setPublishedData:any;
+  searchTerm:any;
+  setSearchTerm:any;
+  tag:any;
+  setTag:any;
   handleLogin: (loggedInUsername: string) => void;
   handleLogout: () => void;
   handleUsernameChange: (event: any) => void;
@@ -36,6 +42,8 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal1, setShowModal1] = useState<boolean>(false);
   const [publishedData, setPublishedData] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [tag, setTag] = useState<string>("");
   const ref = React.useRef(null);
   const handleLogin = (loggedInUsername: string) => {
     setUsername(loggedInUsername);
@@ -72,26 +80,26 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
       description: data.description,
       image: data.selectedFile,
     };
-    const storedData = JSON.parse(
-      localStorage.getItem("publishedData") || "[]"
-    );
-    localStorage.setItem(
-      "publishedData",
-      JSON.stringify([...storedData, newItem])
-    );
+    
+    // Retrieve the current published data from local storage
+    const storedData = JSON.parse(localStorage.getItem("publishedData") || "[]");
+  
+    // Update the local storage with the new item
+    const updatedData = [...storedData, newItem];
+    localStorage.setItem("publishedData", JSON.stringify(updatedData));
+  
+    // Update the state with the new data
+    setPublishedData(updatedData);
   };
 
-  useEffect(() => {
-    const storedData = JSON.parse(
-      localStorage.getItem("publishedData") || "[]"
-    );
-    setPublishedData(storedData);
-  }, []);
+ 
+  
   const handleClearLocalStorage = () => {
     console.log("clear...");
     localStorage.removeItem("publishedData");
     setPublishedData([]);
   };
+
   const value: AuthContextType = {
     ref,
     username,
@@ -101,6 +109,12 @@ export const Store: React.FC<{ children: React.ReactNode }> = ({
     showModal1,
     setShowModal,
     setShowModal1,
+    publishedData,
+    tag,
+    setTag,
+    setPublishedData,
+    searchTerm,
+    setSearchTerm,
     handleLogin,
     handleLogout,
     handleUsernameChange,

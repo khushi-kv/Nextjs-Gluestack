@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Login from "../login/login";
 import {
   Avatar,
@@ -17,8 +17,8 @@ import {
   AvatarFallbackText,
 } from "@gluestack-ui/themed";
 import { Store, useAuth } from "@/app/context/store";
-import Write from "../write/write";
-
+import Compose from "../compose/compose";
+import blog from "../../../data/blogposts.json";
 export default function Header() {
   const {
     username,
@@ -27,12 +27,13 @@ export default function Header() {
     showModal1,
     setShowModal,
     setShowModal1,
+    setSearchTerm,
     handleLogin,
     handleLogout,
     handlePublish,
-    // handleClearLocalStorage
+    handleClearLocalStorage,
   } = useAuth();
-
+  
   const ref = React.useRef(null);
   const HeaderStyle = {
     "@base": {
@@ -44,6 +45,10 @@ export default function Header() {
     "@lg": {
       display: "block",
     },
+  };
+  const handleSearch = (e: any) => {
+    setSearchTerm(e.target.value);
+    console.log("Parent Component - Search Term:", e.target.value);
   };
   return (
     <Store>
@@ -86,7 +91,7 @@ export default function Header() {
                 bg="#F9F9F9"
               >
                 <Icon as={SearchIcon} w="$5" h="$6" marginTop={"$2"} />
-                <InputField placeholder="Search" />
+                <InputField placeholder="Search" onChange={handleSearch} />
               </Input>
               <Box
                 display="flex"
@@ -135,7 +140,7 @@ export default function Header() {
                   bg="red"
                   onPress={handleClearLocalStorage}
                 >
-                  <ButtonText>ClearSS localStorage</ButtonText>
+                  <ButtonText>Clear localStorage</ButtonText>
                 </Button> */}
 
                 <>
@@ -153,7 +158,7 @@ export default function Header() {
                   </Button>
                 </>
               </Box>
-              <Write
+              <Compose
                 showModal1={showModal1}
                 setShowModal1={setShowModal1}
                 onPublish={handlePublish}
@@ -184,7 +189,7 @@ export default function Header() {
                 setShowModal={setShowModal}
                 onLogin={handleLogin}
               />
-              <Write
+              <Compose
                 showModal1={showModal1}
                 setShowModal1={setShowModal1}
                 onPublish={handlePublish}

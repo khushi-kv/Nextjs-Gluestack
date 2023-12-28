@@ -3,16 +3,17 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Blogs from "../components/blogs/blogs";
 import "../../styles/dashboard.css";
+import { useAuth } from "@/app/context/store";
 export interface BlogPublish {
   id: number;
   title: string;
   description: string;
   image: string;
-  avatar:string;
+  avatar: string;
 }
 
 export default function Dashboard() {
-  const [publishedData, setPublishedData] = useState<BlogPublish[]>([]);
+  const { publishedData, setPublishedData, searchTerm, tag } = useAuth();
 
   useEffect(() => {
     const storedData = JSON.parse(
@@ -22,7 +23,11 @@ export default function Dashboard() {
   }, []);
   return (
     <main>
-      <Blogs publishedData={publishedData} />
+      <Blogs
+        publishedData={publishedData}
+        searchTerm={searchTerm}
+        selectedTopic={tag}
+      />
     </main>
   );
 }

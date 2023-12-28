@@ -1,3 +1,4 @@
+import { useAuth } from "@/app/context/store";
 import {
   Box,
   ModalBackdrop,
@@ -27,7 +28,7 @@ import {
 } from "@gluestack-ui/themed";
 
 import React, { useState  } from "react";
-interface WriteProps {
+interface ComposeProps {
   showModal1: boolean;
   setShowModal1: React.Dispatch<React.SetStateAction<boolean>>;
   onPublish: (data: {
@@ -37,11 +38,11 @@ interface WriteProps {
   }) => void;
 }
 
-export default function Write({
+export default function Compose({
   showModal1,
   setShowModal1,
   onPublish,
-}: WriteProps) {
+}: ComposeProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isTitleValid, setIsTitleValid] = useState(false);
@@ -50,6 +51,7 @@ export default function Write({
   const [descriptionTouched, setDescriptionTouched] = useState(false);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const ref = React.useRef(null);
+  
   const handleTitleChange = (event: any) => {
     const newTitle = event.target.value;
     setTitle(newTitle);
@@ -77,9 +79,10 @@ export default function Write({
     }
   };
 
-  const isFormValid = isTitleValid && isDescriptionValid;
+  const isFormValid = isTitleValid && isDescriptionValid && selectedFile!==null;
   const handlePublish = () => {
     onPublish({ title, description, selectedFile });
+    
     localStorage.setItem("publishedTitle", title);
     localStorage.setItem("publishedDescription", description);
     localStorage.setItem("publishedImage", selectedFile || "");
@@ -114,7 +117,7 @@ export default function Write({
         <ModalBackdrop />
         <ModalContent>
           <ModalHeader>
-            <Heading size="lg">Write Blog.</Heading>
+            <Heading size="lg">Compose Blog.</Heading>
             <ModalCloseButton>
               <Icon as={CloseIcon} />
             </ModalCloseButton>
