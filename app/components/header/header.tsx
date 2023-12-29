@@ -175,13 +175,15 @@ export default function Header() {
               >
                 <Button
                   size="sm"
+                  p={"$4"}
                   variant="solid"
                   bg="black"
                   action="secondary"
+                  borderRadius={"$full"}
                   onPress={() => setShowModal(true)}
                   ref={ref}
                 >
-                  <ButtonText>Get Started</ButtonText>
+                  <ButtonText fontWeight="300">Get Started</ButtonText>
                 </Button>
               </Box>
               <Login
